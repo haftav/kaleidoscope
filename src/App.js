@@ -4,7 +4,7 @@ import Profile from './views/Profile';
 import Header from './components/Header';
 import './styles/main.scss';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import _throttle from 'lodash.throttle';
 
 class App extends Component {
@@ -29,19 +29,15 @@ class App extends Component {
   };
 
   endScroll = () => {
-    console.log(this.scrollTimeout);
     window.clearTimeout(this.scrollTimeout);
-    console.log(this.scrollTimeout);
     this.setState({
       scrolling: true
     })
-  }
+  };
 
   handleScroll = (e) => {
-    console.log(window.pageYOffset);
     if (window.pageYOffset !== 0) {
       window.clearTimeout(this.scrollTimeout);
-      console.log('here');
       this.setState({
         scrolling: true
       })
@@ -59,18 +55,16 @@ class App extends Component {
     }
   }
 
-  throttleScroll = _throttle(this.handleScroll, 500);
+  throttleScroll = _throttle(this.handleScroll, 300);
 
   render() {
     return (
       <div className="App">
       <Header moving={this.state.scrolling}/>
-      <Router>
         <Switch>
           <Route exact path="/" component={Waterfall} />
           <Route path="/profile" component={Profile} />
         </Switch>
-      </Router>
       </div>
     );
   }

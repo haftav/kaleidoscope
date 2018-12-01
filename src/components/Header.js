@@ -17,7 +17,7 @@ export default class Header extends React.Component {
 
     render() {
         return (
-            <nav className={`Header ${this.props.moving ? 'Header Header__moving' : ''}`}>
+            <nav className={`Header ${this.props.moving ? 'Header__moving' : ''}`}>
                 {
                     <ul className="Header_nav">
                         {

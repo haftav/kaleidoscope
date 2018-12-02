@@ -47,10 +47,6 @@
     height: 50px;
     transition: all 0.3s ease-in-out;
 
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.705);
-    }
-    
     .Header_nav {
         .Header_nav_link {
             color: #BBB;
@@ -60,4 +56,13 @@
             }
         }
     }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.95);
+        .Header_nav_link {
+            color: white;
+        }
+    }
+    
+
 }

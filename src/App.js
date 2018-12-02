@@ -19,11 +19,11 @@ class App extends Component {
     this.endScroll = this.endScroll.bind(this);
     this.throttleScroll = this.throttleScroll.bind(this);
   }
-  
+
   componentDidMount() {
     window.addEventListener('scroll', this.throttleScroll);
   };
-  
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.throttleScroll);
   };
@@ -36,7 +36,7 @@ class App extends Component {
   };
 
   handleScroll = (e) => {
-    if (window.pageYOffset !== 0) {
+    if (window.pageYOffset > 100) {
       window.clearTimeout(this.scrollTimeout);
       this.setState({
         scrolling: true
@@ -55,16 +55,16 @@ class App extends Component {
     }
   }
 
-  throttleScroll = _throttle(this.handleScroll, 300);
+  throttleScroll = _throttle(this.handleScroll, 250);
 
   render() {
     return (
       <div className="App">
-      <Header moving={this.state.scrolling}/>
-        <Switch>
-          <Route exact path="/" component={Waterfall} />
-          <Route path="/profile" component={Profile} />
-        </Switch>
+        <Header moving={this.state.scrolling} />
+          <Switch>
+            <Route exact path="/" component={Waterfall} />
+            <Route path="/profile" component={Profile} />
+          </Switch>
       </div>
     );
   }

@@ -36,7 +36,7 @@ class App extends Component {
   };
 
   handleScroll = (e) => {
-    if (window.pageYOffset > 100) {
+    if (window.pageYOffset > 250) {
       window.clearTimeout(this.scrollTimeout);
       this.setState({
         scrolling: true
@@ -55,7 +55,7 @@ class App extends Component {
     }
   }
 
-  throttleScroll = _throttle(this.handleScroll, 250);
+  throttleScroll = _throttle(this.handleScroll, 66);
 
   render() {
     return (

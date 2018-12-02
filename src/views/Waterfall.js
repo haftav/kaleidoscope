@@ -17,17 +17,16 @@ export default class Waterfall extends Component {
     render() {
         return(
             <div className="Waterfall">
+                <div className="Waterfall_spotlight"></div>
                 {
                     this.state.images.map(image => {
                         return (
                             <div className="image-wrapper">
                                 <img src={image.largeImageURL}/>
                             </div>
-
                         )
                     })
                 }
-
             </div>
         )
     }

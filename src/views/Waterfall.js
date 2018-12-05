@@ -42,8 +42,8 @@ export default class Waterfall extends Component {
         return(
             <div className="Waterfall">
                 <div className="Waterfall_spotlight">
-                    <SearchBar handleInputChange={this.handleInputChange} value={this.state.searchTerm}/>
-                    <button onClick={this.handleClick}>Get Images</button>
+                    <SearchBar handleInputChange={this.handleInputChange} handleClick={this.handleClick} value={this.state.searchTerm}/>
+                    
                 </div>
                 {
                     this.state.images.map(image => {

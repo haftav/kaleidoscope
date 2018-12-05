@@ -36,7 +36,7 @@ class App extends Component {
   };
 
   handleScroll = (e) => {
-    if (window.pageYOffset > 250) {
+    if (window.pageYOffset > 50) {
       window.clearTimeout(this.scrollTimeout);
       this.setState({
         scrolling: true

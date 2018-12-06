@@ -13,23 +13,18 @@ const ComponentWithSubscription = (ComponentToRender) => {
                 this.setState({
                     images: newImages
                 });
-            })
+            });
         }
 
         handleClick = (searchTerm) => {
-            console.log('here');
-            console.log(searchTerm);
-            if (searchTerm) {
+
                 axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${searchTerm}`).then(res => {
-                    console.log(res);
+                    console.log(res.data.hits);
                     let newImages = res.data.hits;
                     this.setState({
                         images: newImages
                     });
                 });
-            } else {
-                alert("Please enter a search term.");
-            }
         }
 
         render() {

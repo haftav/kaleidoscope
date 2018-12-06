@@ -12,6 +12,29 @@
       display: flex;
       flex-wrap: wrap;
 
+      .Waterfall_hidden {
+        display: none;
+      }
+
+      .Waterfall_loading {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .Waterfall_loading_spinner {
+          width: 100px;
+          height: 100px;
+          border: 3px solid rgb(192, 220, 229);
+          border-radius: 50%;
+          border-top: 3px solid #EEE;
+          @keyframes spin {
+            from { transform: rotate(0deg) }
+            to { transform: rotate(360deg) }
+          }
+          animation: spin 1s ease-in-out infinite;
+        }
+      }
 }
   
 .Waterfall_spotlight {
@@ -51,6 +74,7 @@
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
       color: #888;
+      cursor: pointer;
     }
   }
 }

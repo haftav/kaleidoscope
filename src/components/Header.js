@@ -23,7 +23,7 @@ export default class Header extends React.Component {
                         {
                             this.state.headings.map((heading) => {
                                 return (
-                                    <Link to={heading.link} className="Header_nav_link">
+                                    <Link to={heading.link} className="Header_nav_link" key={heading.name}>
                                         <li>{heading.name}</li>
                                     </Link>
                                 )

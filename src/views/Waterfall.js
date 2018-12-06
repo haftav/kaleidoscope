@@ -8,14 +8,6 @@ export default class Waterfall extends Component {
         images: [],
         searchTerm: ''
     }
-    componentDidMount() {
-        axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}`).then(res => {
-            let newImages = res.data.hits;
-            this.setState({
-                images: newImages
-            });
-        })
-    }
 
     handleInputChange = (e) => {
         console.log(e.target.value);
@@ -25,28 +17,20 @@ export default class Waterfall extends Component {
         })
     }
 
-    handleClick = () => {
-        if (this.state.searchTerm) {
-            axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${this.state.searchTerm}`).then(res => {
-                let newImages = res.data.hits;
-                this.setState({
-                    images: newImages
-                });
-            });
-        } else {
-            alert("Please enter a search term.");
-        }
+    onLoad = (feedItem) => {
+        this.setState({
+
+        })
     }
 
     render() {
         return(
             <div className="Waterfall">
                 <div className="Waterfall_spotlight">
-                    <SearchBar handleInputChange={this.handleInputChange} handleClick={this.handleClick} value={this.state.searchTerm}/>
-                    
+                    <SearchBar handleInputChange={this.handleInputChange} handleClick={this.props.handleClick} value={this.state.searchTerm}/>
                 </div>
                 {
-                    this.state.images.map(image => {
+                    this.props.images.map(image => {
                         return (
                             <div className="image-wrapper">
                                 <img src={image.largeImageURL}/>

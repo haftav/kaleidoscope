@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Waterfall from './views/Waterfall';
+import ComponentWithSubscription from './components/ComponentWithSubscription';
 import Profile from './views/Profile';
 import Header from './components/Header';
-import './styles/main.scss';
-
 import { Route, Switch } from 'react-router-dom';
 import _throttle from 'lodash.throttle';
+import './styles/main.scss';
+
+const WaterfallWithSubscription = ComponentWithSubscription(Waterfall);
 
 class App extends Component {
   constructor(props) {
@@ -15,8 +17,6 @@ class App extends Component {
       scrolling: false
     }
 
-    this.handleScroll = this.handleScroll.bind(this);
-    this.endScroll = this.endScroll.bind(this);
     this.throttleScroll = this.throttleScroll.bind(this);
   }
 
@@ -62,7 +62,7 @@ class App extends Component {
       <div className="App">
         <Header moving={this.state.scrolling} />
           <Switch>
-            <Route exact path="/" component={Waterfall} />
+            <Route exact path="/" component={WaterfallWithSubscription} />
             <Route path="/profile" component={Profile} />
           </Switch>
       </div>

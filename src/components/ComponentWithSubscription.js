@@ -6,7 +6,6 @@ const ComponentWithSubscription = (ComponentToRender) => {
         state = {
             images: []
         }
-
         componentDidMount() {
             axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}`).then(res => {
                 let newImages = res.data.hits;
@@ -15,18 +14,22 @@ const ComponentWithSubscription = (ComponentToRender) => {
                 });
             });
         }
-
         handleClick = (searchTerm) => {
-
                 axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${searchTerm}`).then(res => {
-                    console.log(res.data.hits);
                     let newImages = res.data.hits;
+                    if (newImages.length === 0) {
+                        throw new Error('No results found for that query.')
+                    }
                     this.setState({
                         images: newImages
                     });
+                }).catch((e) => {
+                    console.error(e);
+                    this.setState({
+                        images: []
+                    })
                 });
         }
-
         render() {
             return (
                 <ComponentToRender handleClick={this.handleClick} images={this.state.images} {...this.props} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './Waterfall/SearchBar';
-
+import _isEqual from 'lodash.isequal';
 
 export default class Waterfall extends Component {
     state = {
@@ -15,6 +15,14 @@ export default class Waterfall extends Component {
             this.setState({
                 loading: false
             })
+        }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (!_isEqual(this.props, nextProps) || !_isEqual(this.state, nextState)) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -60,7 +68,7 @@ export default class Waterfall extends Component {
     }
 
     render() {
-        console.log(this.state.loadedImages);
+        console.log(this.state.loadedImages)
         let images = this.state.loadedImages.map(image => {
             return (
                 <div className="image-wrapper" key={image.largeImageURL}>

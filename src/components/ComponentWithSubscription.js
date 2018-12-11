@@ -14,6 +14,7 @@ const ComponentWithSubscription = (ComponentToRender) => {
                 });
             });
         }
+
         handleClick = (searchTerm) => {
                 axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}&q=${searchTerm}`).then(res => {
                     let newImages = res.data.hits;

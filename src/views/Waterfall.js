@@ -11,7 +11,7 @@ export default class Waterfall extends Component {
 
     componentDidUpdate(prevProps) {
         //This doesn't update if 2 searches return in a row with no results. May have to move loading logic to HOC
-        if (this.props.images.length === 0 && prevProps.images.length !== 0) {
+        if (this.props.images.length === 0) {
             this.setState({
                 loading: false
             })
@@ -34,7 +34,7 @@ export default class Waterfall extends Component {
     }
 
     handleClick = (searchTerm) => {
-        if (!searchTerm) alert("Please enter a search term.");
+        if (!searchTerm) return alert("Please enter a search term.");
         if (!Waterfall.searchTerm[searchTerm]) {
             Waterfall.searchTerm[searchTerm] = searchTerm;
             this.setState({
@@ -43,11 +43,13 @@ export default class Waterfall extends Component {
             })
             this.props.handleClick(searchTerm);
         } else {
+            this.props.handleClick(searchTerm)
             this.setState(() => {
                 return {
                     loading: true,
+                    loadedImages: []
                 }
-            }, () => setTimeout(() => this.setState({loading: false}), 250))
+            }, () => setTimeout(() => this.setState({ loading: false }), 250))
         }
     }
 
@@ -82,7 +84,7 @@ export default class Waterfall extends Component {
                     <SearchBar handleInputChange={this.handleInputChange} handleClick={this.handleClick} value={this.state.searchTerm} />
                 </div>
                 {
-                    (this.state.loading ? <div className="Waterfall_loading"><div className="Waterfall_loading_spinner"/></div> : images)         
+                    (this.state.loading ? <div className="Waterfall_loading"><div className="Waterfall_loading_spinner" /></div> : images)
                 }
                 {
                     this.props.images.length === 0 && !this.state.loading && <div>No images found.</div>

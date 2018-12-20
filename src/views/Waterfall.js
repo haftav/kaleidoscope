@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './Waterfall/SearchBar';
+import HeartBorder from '../assets/icons/HeartBorder';
 import _isEqual from 'lodash.isequal';
 
 export default class Waterfall extends Component {
@@ -27,6 +28,7 @@ export default class Waterfall extends Component {
             return (
                 <div className="image-wrapper" key={image}>
                     <img src={image} />
+                    <HeartBorder fill="#aaa" className="icon_heart"/>
                 </div>
             )
         })

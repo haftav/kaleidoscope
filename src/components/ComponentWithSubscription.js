@@ -8,6 +8,7 @@ const ComponentWithSubscription = (ComponentToRender) => {
             loadedImages: [],
             loading: true
         }
+
         componentDidMount() {
             axios.get(`${process.env.REACT_APP_PIXABAY_API_URL}?key=${process.env.REACT_APP_PIXABAY_API_KEY}`).then(res => {
                 let newImages = res.data.hits;
@@ -16,29 +17,6 @@ const ComponentWithSubscription = (ComponentToRender) => {
                 }, () => this.preloadImages(newImages));
             }).catch((err) => {
                 console.error(err);
-            })
-        }
-
-        handleLoad = (imageSrc) => {
-            let newLoadedImages = [...this.state.loadedImages];
-            newLoadedImages.push(imageSrc);
-            if (newLoadedImages.length === this.state.images.length) {
-                this.setState({
-                    loadedImages: newLoadedImages,
-                    loading: false
-                })
-            } else {
-                this.setState({
-                    loadedImages: newLoadedImages
-                })
-            }
-        }
-
-        preloadImages = (images) => {
-            images.forEach((image) => {
-                const img = new Image();
-                img.onload = () => this.handleLoad(image.largeImageURL)
-                img.src = image.largeImageURL
             })
         }
 
@@ -61,6 +39,30 @@ const ComponentWithSubscription = (ComponentToRender) => {
                 })
             });
         }
+
+        preloadImages = (images) => {
+            images.forEach((image) => {
+                const img = new Image();
+                img.onload = () => this.handleLoad(image.largeImageURL)
+                img.src = image.largeImageURL
+            })
+        }
+        
+        handleLoad = (imageSrc) => {
+            let newLoadedImages = [...this.state.loadedImages];
+            newLoadedImages.push(imageSrc);
+            if (newLoadedImages.length === this.state.images.length) {
+                this.setState({
+                    loadedImages: newLoadedImages,
+                    loading: false
+                })
+            } else {
+                this.setState({
+                    loadedImages: newLoadedImages
+                })
+            }
+        }
+        
         render() {
             console.log(this.state.loadedImages.length, this.state.loading)
             return (

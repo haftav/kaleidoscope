@@ -61,10 +61,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header moving={this.state.scrolling} />
-          <Switch>
-            <Route exact path="/" component={WaterfallWithSubscription} />
-            <Route path="/profile" component={Profile} />
-          </Switch>
+        <WaterfallWithSubscription />
       </div>
     );
   }
